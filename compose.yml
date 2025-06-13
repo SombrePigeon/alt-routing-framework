@@ -1,0 +1,5 @@
+services:
+    alt-routing-framework:
+        build:
+            context: .
+            dockerfile: Containerfile #compatibility :/
