@@ -1,5 +1,29 @@
 services:
     alt-routing-framework:
+        profiles: [none] 
         build:
             context: .
-            dockerfile: Containerfile #compatibility :/
+            dockerfile_inline: FROM sombrepigeon/alt-routing-framework
+        develop:
+                watch:
+                    -   
+                        action: sync
+                        path: ./src/
+                        target: /src/
+                        ignore: 
+                            - "*.html"
+                            - "**/*.html"
+                            - "importmap.json"
+                    -   
+                        action: sync+exec
+                        path: ./src/
+                        target: /src/
+                        include: 
+                            - "*.html"
+                            - "**/*.html"
+                            - "importmap.json"
+                        ignore: 
+                            - "index.html"
+                            - "**/index.html"
+                        exec: 
+                            command: make -C /src/

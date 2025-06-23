@@ -1,0 +1,11 @@
+FROM httpd:alpine
+EXPOSE 80
+RUN apk add make bash
+RUN rm -rf htdocs
+RUN ln -s /src/html htdocs
+COPY generate_indexes.sh /alt-routing-framework/generate_indexes.sh
+COPY makefile /alt-routing-framework/makefile
+
+ONBUILD ARG SRC=./src/
+ONBUILD COPY ${SRC} /src/
+ONBUILD RUN make -C /src/ -f /alt-routing-framework/makefile

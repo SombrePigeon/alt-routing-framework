@@ -1,0 +1,6 @@
+services:
+    alt-routing-framework:
+        image: sombrepigeon/alt-routing-framework
+        build:
+            dockerfile: Containerfile #compatibility :/
+
